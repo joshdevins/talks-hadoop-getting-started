@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title>access-log-throughput</title>
+</head>
+<body>
+    <h3>num transactions per hour</h3>
+    <div id="numTxPerHour">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/static/modules/gviz/1.0/chart.js"> {"chartType":"AnnotatedTimeLine","chartName":"sums","dataSourceUrl":"https://spreadsheets.google.com/tq?key=0AqAx7w3Zbl99dHFwX2l0TU4wQ2tWYWNZTG1DOENOTVE&transpose=0&headers=1&range=A1%3AB8753&gid=2&pub=1","options":{"displayAnnotations":true,"showTip":true,"dataMode":"markers","fontColor":"#fff","midColor":"#36c","pointSize":"0","colors":["#3366CC","#DC3912","#FF9900","#109618","#990099","#0099C6","#DD4477","#66AA00","#B82E2E","#316395"],"headerColor":"#3d85c6","smoothLine":false,"lineWidth":"2","maxColor":"#222","headerHeight":40,"labelPosition":"right","is3D":false,"fontSize":"14px","hasLabelsColumn":true,"wmode":"opaque","hAxis":{"maxAlternation":1},"maxDepth":2,"allowCollapse":true,"minColor":"#ccc","isStacked":false,"mapType":"hybrid","width":800,"height":400,"zoomStartTime":new Date(2010, 6 ,1), "displayZoomButtons":false},"refreshInterval":5} </script>
+    </div>
+
+    <h3>90th %, 99th %, max TPS per hour</h3>
+    <div id="tpsStatsPerHour">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/static/modules/gviz/1.0/chart.js"> {"chartType":"AnnotatedTimeLine","chartName":"tops","dataSourceUrl":"https://spreadsheets.google.com/tq?key=0AqAx7w3Zbl99dHFwX2l0TU4wQ2tWYWNZTG1DOENOTVE&transpose=0&headers=1&merge=COLS&range=A1%3AA8753%2CE1%3AG8753&gid=2&pub=1","options":{"fontColor":"#fff","midColor":"#36c","pointSize":"0","headerColor":"#3d85c6","headerHeight":40,"is3D":false,"displayRangeSelector":true,"hAxis":{"maxAlternation":1},"wmode":"opaque","mapType":"hybrid","isStacked":false,"showTip":true,"displayAnnotations":true,"dataMode":"markers","colors":["#3366CC","#DC3912","#FF9900","#109618","#990099","#0099C6","#DD4477","#66AA00","#B82E2E","#316395"],"smoothLine":false,"maxColor":"#222","lineWidth":"2","labelPosition":"right","fontSize":"14px","hasLabelsColumn":true,"maxDepth":2,"allowCollapse":true,"minColor":"#ccc","displayZoomButtons":false,"zoomStartTime":new Date(2010, 6 ,1),"width":800,"height":400},"refreshInterval":5} </script>
+    </div>
+</body>
+</html>
