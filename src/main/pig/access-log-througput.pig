@@ -22,8 +22,10 @@ logs = LOAD 'data/logs/*-access.log' USING ApacheCombinedLogLoader AS
 -- convert the timestamp to most significat fields first: 07/Sep/2010:10:17:45 +0000 -> 2010-09-07 10:17:45
 logs = FOREACH logs GENERATE SimpleDateTimeConverter(timestamp) AS ts_second, method, statusCode;
 
--- let's only consider GET requests that return 2xx-3xx
-logs = FILTER logs BY method == 'GET' AND statusCode >= 200 AND statusCode <= 399;
+-- let's only consider 2010 data, GET requests that return 2xx-3xx
+logs = FILTER logs BY
+    ts_second matches '2010-.*' AND method == 'GET' AND
+    statusCode >= 200 AND statusCode <= 399;
 
 -- generate the TPS by grouping by the timestamp in seconds, then counting
 bySecond = GROUP logs BY ts_second;
@@ -35,8 +37,9 @@ byHour = FOREACH bySecond GENERATE SUBSTRING(ts_second, 0, 13) AS ts_hour, count
 byHour = GROUP byHour BY ts_hour;
 byHour = FOREACH byHour GENERATE group AS ts_hour, byHour.count AS counts;
 
+-- generate statistics on TPS that occur in each hour
 byHour = FOREACH byHour GENERATE
-    ts_hour, SUM(counts) AS sum,
+    CONCAT(ts_hour, ':00:00') AS ts_hour, SUM(counts) AS sum,
     ROUND(AVG(counts)) AS average, Percentile(counts, 50.0) AS median,
     Percentile(counts, 90.0) AS percentile_90, Percentile(counts, 99.0) AS percentile_99,
     FLATTEN(MaxTupleBy1stField(counts)) AS max;
