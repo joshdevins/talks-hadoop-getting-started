@@ -1,6 +1,8 @@
 set job.name 'Apache Access Log Throughput'
 set default_parallel 2
 
+REGISTER target/hadoop-getting-started-1-SNAPSHOT-jar-with-dependencies.jar
+
 -- PiggyBank UDFs
 DEFINE ApacheCombinedLogLoader org.apache.pig.piggybank.storage.apachelog.CombinedLogLoader();
 DEFINE SUBSTRING org.apache.pig.piggybank.evaluation.string.SUBSTRING();
@@ -11,14 +13,14 @@ DEFINE ROUND org.apache.pig.piggybank.evaluation.math.ROUND();
 DEFINE SimpleDateTimeConverter net.joshdevins.talks.hadoopstart.pig.udf.evaluation.SimpleDateTimeConverter('dd/MMM/yyyy:HH:mm:ss Z', 'yyyy-MM-dd HH:mm:ss');
 DEFINE Percentile net.joshdevins.talks.hadoopstart.pig.udf.evaluation.Percentile();
 
-logs = LOAD 'data/logs/*-access.log' USING ApacheCombinedLogLoader AS
+raw = LOAD 'data/logs/*-access.log' USING ApacheCombinedLogLoader AS
     (remoteAddr:chararray, remoteLogname:chararray, user:chararray,
      timestamp:chararray, method:chararray, uri:chararray, protocol:chararray,
      statusCode:int, bytes:long, referrer:chararray, userAgent:chararray);
 
 -- project just the fields that we want
 -- convert the timestamp to most significat fields first: 07/Sep/2010:10:17:45 +0000 -> 2010-09-07 10:17:45
-logs = FOREACH logs GENERATE SimpleDateTimeConverter(timestamp) AS ts_second, method, statusCode;
+logs = FOREACH raw GENERATE SimpleDateTimeConverter(timestamp) AS ts_second, method, statusCode;
 
 -- let's only consider 2010 data, GET requests that return 2xx-3xx
 logs = FILTER logs BY
