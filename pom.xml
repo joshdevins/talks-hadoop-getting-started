@@ -101,10 +101,6 @@
             <version>0.8.0</version>
             <exclusions>
                 <exclusion>
-                    <groupId>commons-httpclient</groupId>
-                    <artifactId>commons-httpclient</artifactId>
-                </exclusion>
-                <exclusion>
                     <groupId>commons-codec</groupId>
                     <artifactId>commons-codec</artifactId>
                 </exclusion>
@@ -214,6 +210,42 @@
             <groupId>com.cloudera.hadoop</groupId>
             <artifactId>hadoop-mrunit</artifactId>
             <version>${hadoop.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- PIGUNIT and dependencies -->
+        <!--
+            cd $PIG_HOME; ant pigunit-jar
+        -->
+        <!--
+            mvn install:install-file -Dfile=$PIG_HOME/pigunit.jar -DgroupId=org.apache.pig
+            -DartifactId=pigunit -Dversion=0.8.0 -Dpackaging=jar
+        -->
+        <dependency>
+            <groupId>org.apache.pig</groupId>
+            <artifactId>pigunit</artifactId>
+            <version>0.8.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <!-- for PigUnit -->
+            <groupId>jline</groupId>
+            <artifactId>jline</artifactId>
+            <version>0.9.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <!-- for PigUnit -->
+            <groupId>com.google.collections</groupId>
+            <artifactId>google-collections</artifactId>
+            <version>1.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <!-- for PigUnit -->
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.7.4</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
