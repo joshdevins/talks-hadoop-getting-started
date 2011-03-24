@@ -2,5 +2,3 @@
 .project
 .settings
 target
-.pigunit-input-overriden.txt.crc
-pigunit-input-overriden.txt
