@@ -101,10 +101,6 @@
             <version>0.8.0</version>
             <exclusions>
                 <exclusion>
-                    <groupId>commons-codec</groupId>
-                    <artifactId>commons-codec</artifactId>
-                </exclusion>
-                <exclusion>
                     <groupId>commons-el</groupId>
                     <artifactId>commons-el</artifactId>
                 </exclusion>
@@ -176,6 +172,30 @@
             <artifactId>piggybank</artifactId>
             <version>r1043805</version>
         </dependency>
+        <dependency>
+            <groupId>jline</groupId>
+            <artifactId>jline</artifactId>
+            <version>0.9.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.collections</groupId>
+            <artifactId>google-collections</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.7.4</version>
+        </dependency>
+        <dependency>
+            <!--
+                mvn install:install-file -Dfile=$PIG_HOME/lib/automaton.jar
+                -DgroupId=dk.brics.automaton -DartifactId=automaton -Dversion=1.11.6 -Dpackaging=jar
+            -->
+            <groupId>dk.brics.automaton</groupId>
+            <artifactId>automaton</artifactId>
+            <version>1.11.6</version>
+        </dependency>
 
         <!-- STANDARD -->
         <dependency>
@@ -226,37 +246,6 @@
             <artifactId>pigunit</artifactId>
             <version>0.8.0</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <!-- for PigUnit -->
-            <groupId>jline</groupId>
-            <artifactId>jline</artifactId>
-            <version>0.9.9</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <!-- for PigUnit -->
-            <groupId>com.google.collections</groupId>
-            <artifactId>google-collections</artifactId>
-            <version>1.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <!-- for PigUnit -->
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.7.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <!-- for PigUnit testing of some scripts -->
-            <!--
-                mvn install:install-file -Dfile=$PIG_HOME/lib/automaton.jar
-                -DgroupId=dk.brics.automaton -DartifactId=automaton -Dversion=1.11.6 -Dpackaging=jar
-            -->
-            <groupId>dk.brics.automaton</groupId>
-            <artifactId>automaton</artifactId>
-            <version>1.11.6</version>
         </dependency>
     </dependencies>
 
