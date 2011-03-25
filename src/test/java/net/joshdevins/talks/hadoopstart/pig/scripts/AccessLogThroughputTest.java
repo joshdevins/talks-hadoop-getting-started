@@ -1,12 +1,13 @@
 package net.joshdevins.talks.hadoopstart.pig.scripts;
 
-import java.io.File;
-
 import org.apache.pig.pigunit.PigTest;
-import org.junit.AfterClass;
 import org.junit.Test;
 
-public final class AccessLogThroughputTest {
+public final class AccessLogThroughputTest extends PigUnitBase {
+
+    public AccessLogThroughputTest() {
+        super(AccessLogThroughputTest.class);
+    }
 
     @Test
     public void testScript() throws Exception {
@@ -22,17 +23,5 @@ public final class AccessLogThroughputTest {
         // PigUnit will discard any STORE and DUMP calls
         // PigUnit will replace input tuple with one loaded and parsed with PigStorage
         test.assertOutput("raw", input, "byHour", output);
-    }
-
-    @AfterClass
-    public static void afterClass() {
-
-        // cleanup crap left over from PigUnit
-        try {
-            new File("pigunit-input-overriden.txt").delete();
-            new File(".pigunit-input-overriden.txt.crc").delete();
-        } catch (SecurityException se) {
-            throw se;
-        }
     }
 }
