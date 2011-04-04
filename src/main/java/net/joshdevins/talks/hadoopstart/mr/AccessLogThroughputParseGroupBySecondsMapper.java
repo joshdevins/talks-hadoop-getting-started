@@ -27,8 +27,12 @@ public final class AccessLogThroughputParseGroupBySecondsMapper extends Mapper<L
             return;
         }
 
+        // build the grouping key: timestamp in seconds (no timezone, millis, etc.)
+        // length of "30/Sep/2008:15:07:00" = 20
+        String seconds = entry.getTimestamp().substring(0, 20);
+
         try {
-            context.write(new Text(entry.getTimestamp()), NullWritable.get());
+            context.write(new Text(seconds), NullWritable.get());
 
         } catch (InterruptedException ie) {
             System.err.println("Interrupted while writing output");
