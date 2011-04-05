@@ -20,9 +20,8 @@ public class AccessLogThroughputDriver extends Configured implements Tool {
     @Override
     public int run(final String[] args) throws Exception {
 
-        if (args.length != 2) {
-            System.err.printf("Usage: %s [generic options] <input> <output>\n", AccessLogThroughputDriver.class
-                    .getSimpleName()); // NOPMD
+        if (args.length != 0) {
+            System.err.printf("Usage: %s [generic options]\n", AccessLogThroughputDriver.class.getSimpleName()); // NOPMD
             ToolRunner.printGenericCommandUsage(System.err);
             return -1;
         }
@@ -31,8 +30,8 @@ public class AccessLogThroughputDriver extends Configured implements Tool {
         job.setJarByClass(AccessLogThroughputDriver.class);
 
         // set the input and output paths
-        FileInputFormat.setInputPaths(job, args[0]);
-        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        FileInputFormat.setInputPaths(job, "data/logs/*-access.log");
+        FileOutputFormat.setOutputPath(job, new Path("access-log-throughput-mr"));
 
         // submit job and wait for completion
         boolean success = job.waitForCompletion(true);

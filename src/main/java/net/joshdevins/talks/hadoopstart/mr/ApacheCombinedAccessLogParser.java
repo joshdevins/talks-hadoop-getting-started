@@ -38,7 +38,13 @@ public final class ApacheCombinedAccessLogParser {
         entry.setUri(matcher.group(6));
         entry.setProtocol(matcher.group(7));
         entry.setStatusCode(Integer.parseInt(matcher.group(8)));
-        entry.setBytes(Long.parseLong(matcher.group(9)));
+
+        try {
+            entry.setBytes(Long.parseLong(matcher.group(9)));
+        } catch (NumberFormatException nfe) {
+            // just ignore this and don't set the bytes
+        }
+
         entry.setReferrer(matcher.group(10));
         entry.setUserAgent(matcher.group(11));
 

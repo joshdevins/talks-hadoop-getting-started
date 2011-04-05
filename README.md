@@ -21,3 +21,18 @@ Unit testing of Pig is currently done using PigUnit, a new xUnit style testing h
  * heap space is at a premium when running the Pig scripts, so max heap space JVM parameters need to be set (to something like`-Xmx1024m`)
    * running tests from Maven: configured in the Maven `pom` to run the Surefire plugin with a fixed max heap space setting
    * running tests from Eclipse: use the [JUnit Lanch Fixer](http://code.google.com/p/junitlaunchfixer) plugin and set the max heap space for all JUnit executions automatically (note that if you have previous failed launches, you should delete them before running again)
+
+Running
+---
+
+Checkout the source and build it with the Maven assembly plugin.
+
+    mvn assembly:assembly
+
+The demo is done using the Cloudera [training VM v0.3.5](http://cloudera-vm.s3.amazonaws.com/cloudera-demo-0.3.5.tar.bz2?downloads) with CDH3b3. Here are the steps to run the demo. This assumes that you move/copy/mount the Git directory/checkout onto the VM.
+
+    hadoop fs -rmr access-log-throughput-mr; hadoop jar target/hadoop-getting-started-1-SNAPSHOT-jar-with-dependencies.jar net.joshdevins.talks.hadoopstart.mr.AccessLogThroughputDriver
+    hadoop fs -cat access-log-throughput-mr/part-* | more
+
+    hadoop fs -rmr access-log-throughput; java -cp target/hadoop-getting-started-1-SNAPSHOT-jar-with-dependencies.jar:/etc/hadoop/conf org.apache.pig.Main -logfile target/pig.log src/main/pig/access-log-throughput.pig
+    hadoop fs -cat access-log-throughput/part-* | more

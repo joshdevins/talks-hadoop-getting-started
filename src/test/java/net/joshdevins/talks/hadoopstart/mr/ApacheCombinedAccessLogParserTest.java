@@ -30,9 +30,18 @@ public class ApacheCombinedAccessLogParserTest {
         Assert.assertEquals(200, entry.getStatusCode());
         Assert.assertEquals(3190L, entry.getBytes());
         Assert.assertEquals("-", entry.getReferrer());
-        Assert
-                .assertEquals(
-                        "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_4; en-us) AppleWebKit/525.18 (KHTML, like Gecko) Version/3.1.2 Safari/525.20.1",
-                        entry.getUserAgent());
+        Assert.assertEquals(
+                "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_4; en-us) AppleWebKit/525.18 (KHTML, like Gecko) Version/3.1.2 Safari/525.20.1",
+                entry.getUserAgent());
+    }
+
+    @Test
+    public void testParseValidLine_NoBytes() {
+
+        ApacheCombinedAccessLogEntry entry = ApacheCombinedAccessLogParser
+                .parse("1.2.3.4 - - [30/Sep/2008:15:07:53 -0400] \"GET / HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_4; en-us) AppleWebKit/525.18 (KHTML, like Gecko) Version/3.1.2 Safari/525.20.1\"");
+
+        Assert.assertNotNull(entry);
+        Assert.assertEquals(0L, entry.getBytes());
     }
 }
