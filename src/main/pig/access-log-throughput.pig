@@ -1,7 +1,9 @@
 set job.name 'Apache Access Log Throughput'
 set default_parallel 2
 
-REGISTER target/hadoop-getting-started-1-SNAPSHOT-jar-with-dependencies.jar
+%default local ''
+
+$local REGISTER target/hadoop-getting-started-1-SNAPSHOT-jar-with-dependencies.jar
 
 -- PiggyBank UDFs
 DEFINE ApacheCombinedLogLoader org.apache.pig.piggybank.storage.apachelog.CombinedLogLoader();

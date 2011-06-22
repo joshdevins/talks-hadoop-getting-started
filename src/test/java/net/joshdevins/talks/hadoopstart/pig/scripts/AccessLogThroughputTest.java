@@ -12,7 +12,9 @@ public final class AccessLogThroughputTest extends PigUnitBase {
     @Test
     public void testScript() throws Exception {
 
-        PigTest test = new PigTest("src/main/pig/access-log-throughput.pig");
+        // hack to remove REGISTER command
+        String[] args = { "local=--" };
+        PigTest test = new PigTest("src/main/pig/access-log-throughput.pig", args);
 
         String[] input = {
                 "1.2.3.4\t-\t-\t30/Sep/2010:15:07:53 -0400\tGET\t/\tHTTP/1.1\t200\t3190\t-\tMozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_4; en-us) AppleWebKit/525.18 (KHTML, like Gecko) Version/3.1.2 Safari/525.20.1",
